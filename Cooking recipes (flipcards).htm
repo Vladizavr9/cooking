@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Sentences with Translations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f5f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .card-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            width: 420px;
+            height: 300px; /* Increased height to accommodate more content */
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.4s;
+            transform-style: preserve-3d;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
+            border-radius: 15px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* Changed to space-around */
+        }
+
+        .card-front {
+            background-color: #e8f0fe;
+            color: #4a4a4a;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: #d7f1da;
+            color: #383838;
+        }
+
+        .sentence {
+            font-size: 17px;
+            line-height: 1.4;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        /* Button Styles */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .card-button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            opacity: 0.7;
+            transition: opacity 0.2s, background-color 0.2s;
+        }
+
+        .card-button:active {
+            transform: scale(0.95);
+        }
+
+        .correct-button {
+            background-color: rgba(76, 175, 80, 0.7); /* Semi-transparent green */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .correct-button.active {
+            background-color: #00FF00; /* Very bright green, fully opaque  */
+            opacity: 1;
+        }
+
+        .incorrect-button {
+            background-color: rgba(244, 67, 54, 0.7); /* Red, transparent */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .incorrect-button.active {
+            background-color: #f44336;
+            opacity: 1;
+        }
+
+        .correct-button::before {
+            content: '\2713';
+        }
+        .incorrect-button::before {
+            content: '\2715';
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Card 1 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 1)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>Today, I’m going to make a simple and delicious pasta dish called Spaghetti Aglio e Olio.</b></div>
+                        <div class="sentence"><b>It’s an Italian recipe, and I’m really excited to try it.</b></div>
+                        <div class="sentence"><b>Here's my plan:</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Сегодня я собираюсь приготовить простое и очень вкусное блюдо из пасты, которое называется "Спагетти аглио э олио".</b></div>
+                        <div class="sentence"><b>Это итальянский рецепт, и мне не терпится его попробовать.</b></div>
+                        <div class="sentence"><b>Вот мой план:</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 1)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 1)">
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 2)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>First, I’m going to boil some water.</b></div>
+                        <div class="sentence"><b>I’ll fill a large pot with water, add a bit of salt, and put it on the stove.</b></div>
+                        <div class="sentence"><b>I’m turning the heat to high right now, and I’ll wait for the water to boil.</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Прежде всего, я вскипячу воду.</b></div>
+                        <div class="sentence"><b>Наполню большую кастрюлю водой, добавлю щепотку соли и поставлю на плиту.</b></div>
+                        <div class="sentence"><b>Сейчас я включаю сильный огонь и жду, когда вода закипит.</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 2)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 2)">
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 3)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>While the water is heating, I’m planning to prepare the other ingredients.</b></div>
+                        <div class="sentence"><b>Next, I’ll cook the spaghetti.</b></div>
+                        <div class="sentence"><b>When the water boils, I’m going to add the spaghetti.</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Пока вода греется, я подготовлю остальные ингредиенты.</b></div>
+                        <div class="sentence"><b>Затем я приготовлю спагетти.</b></div>
+                        <div class="sentence"><b>Как только вода закипит, я добавлю спагетти.</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 3)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 3)">
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 4)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>I’ll cook it for about 8-10 minutes, until it’s *al dente* (cooked but still firm).</b></div>
+                        <div class="sentence"><b>I’ll stir it sometimes so it doesn’t stick together.</b></div>
+                         <div class="sentence"><b>While the pasta is cooking, I’m going to prepare the sauce.</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Я добавлю спагетти и буду варить их около 8-10 минут, до состояния *аль денте* (когда паста уже готова, но еще немного твердая).</b></div>
+                        <div class="sentence"><b>Буду периодически помешивать, чтобы они не слиплись.</b></div>
+                        <div class="sentence"><b>Пока варится паста, я займусь соусом.</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 4)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 4)">
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 5)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>I’ll peel and slice 4 cloves of garlic thinly.</b></div>
+                        <div class="sentence"><b>Then, I’m planning to heat about 4 tablespoons of olive oil in a large pan over medium heat.</b></div>
+                         <div class="sentence"><b>I’ll add the garlic and a pinch of red chili flakes.</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Я очищу и тонко нарежу 4 зубчика чеснока.</b></div>
+                        <div class="sentence"><b>Затем в большой сковороде на среднем огне разогрею примерно 4 столовые ложки оливкового масла.</b></div>
+                        <div class="sentence"><b>Добавлю чеснок и щепотку хлопьев красного перца чили.</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 5)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 5)">
+                </button>
+            </div>
+        </div>
+
+              <!-- Card 6 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 6)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>I’ll be careful not to burn the garlic—I’m going to cook it until it’s golden and fragrant.</b></div>
+                        <div class="sentence"><b>When the pasta is ready, I’ll drain it and save a little of the pasta water.</b></div>
+                         <div class="sentence"><b>I’m going to add the spaghetti to the pan with the garlic and oil, then toss everything together.</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Буду внимательно следить, чтобы чеснок не подгорел – я хочу, чтобы он стал золотистым и ароматным.</b></div>
+                        <div class="sentence"><b>Когда паста будет готова, я откину ее на дуршлаг, сохранив немного воды, в которой она варилась.</b></div>
+                        <div class="sentence"><b>Затем переложу спагетти в сковороду с чесноком и маслом и тщательно перемешаю.</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 6)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 6)">
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 7)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>If it seems too dry, I’m planning to add a splash of the pasta water.</b></div>
+                        <div class="sentence"><b>Finally, I’ll finish and serve the dish.</b></div>
+                         <div class="sentence"><b>I’m going to sprinkle some chopped parsley on top, and my Spaghetti Aglio e Olio will be ready to eat!</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Если покажется суховато, добавлю немного воды из-под пасты.</b></div>
+                        <div class="sentence"><b>В завершение я закончу приготовление и подам блюдо.</b></div>
+                        <div class="sentence"><b>Посыплю его сверху рубленой петрушкой, и мои спагетти "аглио э олио" будут готовы!</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 7)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 7)">
+                </button>
+            </div>
+        </div>
+
+         <!-- Card 8 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 8)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>In the future, I’m thinking about trying this recipe with other ingredients.</b></div>
+                        <div class="sentence"><b>I might add shrimp or mushrooms—I’m not sure yet.</b></div>
+                         <div class="sentence"><b>I’m also planning to make it for my friends next weekend.</b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>В будущем я подумываю попробовать этот рецепт с другими ингредиентами.</b></div>
+                        <div class="sentence"><b>Возможно, добавлю креветки или грибы – пока не решил.</b></div>
+                        <div class="sentence"><b>А еще я планирую приготовить это блюдо для своих друзей в следующие выходные.</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 8)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 8)">
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="card-row">
+            <div class="card" onclick="flipCard(this, 9)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="sentence"><b>I’m sure they’re going to love it!</b></div>
+                         <div class="sentence"><b></b></div>
+                         <div class="sentence"><b></b></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="sentence"><b>Уверен, им понравится!</b></div>
+                        <div class="sentence"><b></b></div>
+                        <div class="sentence"><b></b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="card-button correct-button" onclick="markCard(this, true, 9)">
+                </button>
+                <button class="card-button incorrect-button" onclick="markCard(this, false, 9)">
+                </button>
+            </div>
+        </div>
+
+        </div>
+
+    <script>
+        function flipCard(card, cardIndex) {
+            card.classList.toggle('flipped');
+        }
+
+        function markCard(button, isCorrect, cardIndex) {
+            const buttonContainer = button.parentNode;
+            const buttons = buttonContainer.querySelectorAll('.card-button');
+            // Reset all button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Set styles for the button
+            button.classList.add('active');
+            console.log(`Card ${cardIndex} marked as ${isCorrect ? 'correct' : 'incorrect'}`);
+        }
+    </script>
+</body>
+</html>
